@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Menu } from 'antd';
-
+import { Menu, Input } from 'antd';
+const { Search } = Input;
+const onSearch = (value, _e, info) => console.log(info?.source, value);
 const items = [
   {
     label: (
@@ -16,23 +15,29 @@ const items = [
   {
     label: (
       <a href="/profile" target="_self" rel="noopener noreferrer">
-        Profile
+        프로필
       </a>
     ),
     key: 'app',
   },
   {
     label: (
+      <Search placeholder="input search text" onSearch={onSearch} enterButton />
+    ),
+    key: 'search',
+  },
+  {
+    label: (
       <a href="/signup" target="_self" rel="noopener noreferrer">
-        signup
+        회원가입
       </a>
     ),
     key: 'alipay',
-  },
+  }
 ];
 
 const AppLayout = ({children}) => {
-  const [current, setCurrent] = useState('home');
+  const [current, setCurrent] = useState('');
   const onClick = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
