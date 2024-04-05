@@ -4,7 +4,9 @@ import AppLayout from '../component/AppLayout';
 const Singup = () => {
   return(
     <AppLayout>
-      <div>signup</div>
+      <div>
+        
+      </div>
     </AppLayout>
   );
 }

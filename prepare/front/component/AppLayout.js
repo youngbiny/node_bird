@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Menu, Input } from 'antd';
+import { Menu, Input, Row, Col } from 'antd';
+import LoginForm from './LoginForm';
+import UserProfile from './UserProfile';
 const { Search } = Input;
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 const items = [
@@ -38,6 +40,7 @@ const items = [
 
 const AppLayout = ({children}) => {
   const [current, setCurrent] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const onClick = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
@@ -45,7 +48,17 @@ const AppLayout = ({children}) => {
   return(
     <div>
       <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
-      {children}
+      <Row gutter={8}>
+        <Col xs={24} md={6}>
+          {isLoggedIn ? <UserProfile setIsLoggedIn={setIsLoggedIn} /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />}
+        </Col>
+        <Col xs={24} md={12}>
+          {children}
+        </Col>
+        <Col xs={24} md={6}>
+          <a href="http://www.zerocho.com" target="_blank" rel="noreferrer noopener">Made by zerocho</a>
+        </Col>
+      </Row>
     </div>
     // <div>
     //   <div>
